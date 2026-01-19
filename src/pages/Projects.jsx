@@ -15,14 +15,14 @@ export default function Projects() {
         {
             id: 2,
             title: "Plant Disease Detection using Deep Learning",
-            tag: "PyTorch, TensorFlow, Keras, Scikit-learn, Matplotlib",
+            tag: "PyTorch, TensorFlow, Keras, , Matplotlib",
             description: "Built a deep learning pipeline using PyTorch and TensorFlow for classification, achieving XX% accuracy on the PlantVillage dataset with advanced data augmentation and OpenCV-based preprocessing. Optimized model performance using transfer learning, Knowledge Distillation, Pruning, and Quantization-Aware Training, added explainability with Grad-CAM and attention maps.",
             color: "var(--color-accent-2)",
         },
         {
             id: 3,
             title: "RoadMaster – Smart Driving School Platform",
-            tag: "Python, TensorFlow, Watchdog, SQLite, Pandas, Scikit-learn",
+            tag: "MERN, javascript, html, css",
             description: "Built a full-stack web platform for driving schools that enables seamless lesson booking, real-time schedule management, secured Stripe-based payments, and personalized user dashboards. Implemented Google-based authentication using Firebase, role-based access control for Admin and Students, and developed an Admin dashboard to manage instructors, services, bookings, and customer reviews. Integrated dynamic calendar scheduling, automated booking storage with MongoDB, and optimized the platform for responsive performance and deployment via Firebase.",
             color: "var(--color-accent-3)",
         },
