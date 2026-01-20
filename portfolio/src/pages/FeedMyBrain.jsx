@@ -1,68 +1,61 @@
-// FeedMyBrain.js
 import axios from "axios";
 import "./FeedMyBrain.css";
 import { useState, useEffect } from "react";
-import { Plus, X, Calendar, Tag, AlertCircle } from "lucide-react";
-export default function FeedMyBrain() {
-  const postComment = (comment) => {
-    axios
-      .post("http://localhost:3000/comments", comment)
-      .then((response) => console.log("Success:", response.data))
-      .catch((error) => console.error("Error:", error));
-  };
+import { Plus, X } from "lucide-react";
 
+export default function FeedMyBrain() {
   const [comments, setComments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newComment, setNewComment] = useState({
     name: "",
-    text: "",
+    comment: "",
   });
 
   useEffect(() => {
     const fetchComments = async () => {
-        try {
-      const response = await axios.get("http://localhost:3000/comments");
-      setComments(response.data);
-    } catch (error) {
-      console.error("Failed to fetch comments:", error);
-    }
+      try {
+        const response = await axios.get("http://localhost:3000/comments");
+        setComments(response.data);
+      } catch (error) {
+        console.error("Failed to fetch comments:", error);
+      }
     };
     fetchComments();
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewComment((prevComment) => ({ ...prevComment, [name]: value }));
+    setNewComment((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (newComment.name.trim()) {
-      const taskToAdd = {
-        ...newComment,
-        
-      };
 
-      setComments((prev) => [...prev, taskToAdd]);
+    if (!newComment.name.trim() || !newComment.comment.trim()) return;
 
-      postComment(taskToAdd);
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/comments",
+        newComment
+      );
 
-      setNewComment({
-        name: "",
-        text: "",
-      });
+      setComments((prev) => [...prev, res.data.comment]);
+
+      setNewComment({ name: "", comment: "" });
       setIsModalOpen(false);
+    } catch (err) {
+      console.error("POST failed:", err.response?.data || err.message);
     }
   };
 
   return (
     <div style={{ padding: "16rem" }}>
       <h1>Feed My Brain</h1>
-      <p>This is the FeedMyBrain page.</p>
-      <p>this is still under construction(a metaphor for growth)</p>
+
       <button onClick={() => setIsModalOpen(true)}>
         <Plus />
       </button>
+
       {isModalOpen && (
         <div className="MODAL">
           <form className="Form" onSubmit={handleSubmit}>
@@ -71,21 +64,22 @@ export default function FeedMyBrain() {
               name="name"
               value={newComment.name}
               onChange={handleInputChange}
-              placeholder="Anonymous Kirby"
               required
             />
+
             <label>Comment:</label>
             <input
-              name="text"
-              value={newComment.text}
+              name="comment"
+              value={newComment.comment}
               onChange={handleInputChange}
-              placeholder="Type your thoughts"
               required
             />
+
             <button className="POST" type="submit">
               Post
             </button>
           </form>
+
           <button className="closeBtn" onClick={() => setIsModalOpen(false)}>
             <X size={28} />
           </button>
@@ -94,9 +88,9 @@ export default function FeedMyBrain() {
 
       <div>
         {comments.map((comment) => (
-          <div className="COMMENT-DIV" key={comment.id}>
+          <div className="COMMENT-DIV" key={comment._id}>
             <strong>{comment.name}</strong>
-            <p>{comment.text}</p>
+            <p>{comment.comment}</p>
           </div>
         ))}
       </div>

@@ -1,36 +1,57 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const dotenv =require("dotenv");
+const connectDB = require("./db");
+
+dotenv.config();
+
 
 const app = express();
-const PORT = 3000;
 
+
+const PORT = 3000;
+const Comment = require("./Comment");
 // Allow CORS from frontend
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: "http://localhost:5173" }));
 
 // Parse JSON request bodies
 app.use(express.json());
 
-
+connectDB();
 let comments = [];
 
 // 🟢 GET all tasks
-app.get('/comments', (req, res) => {
-  res.json(comments);
+app.get("/comments", async (req, res) => {
+  try{
+    const comments= await Comment.find().sort({ createdAt: -1});
+    res.json(comments)
+  }
+  catch(error){
+res.status(500).json({ message: "Failed to fetch comments" });
+  }
 });
 
 // 🟢 POST a new task
-app.post('/comments', (req, res) => {
-  const newComment = req.body;
-  console.log('Received new task:', newComment);
+app.post("/comments", async (req, res) => {
+  try {
+    const { name, comment } = req.body;
 
-  comments.push(newComment);
-  res.json({ message: 'Task added successfully!', task: newTask });
+    if (!name || !comment) {
+      return res.status(400).json({ message: "Name and comment required" });
+    }
+
+    const saved = await Comment.create({ name, comment });
+
+    res.status(201).json({ comment: saved });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 
-
-app.get('/', (req, res) => {
-  res.send('Comment Manager API running 🚀');
+app.get("/", (req, res) => {
+  res.send("Comment Manager API running 🚀");
 });
 
 app.listen(PORT, () => {
