@@ -4,7 +4,7 @@ import Background from "./Backgrounds/Background";
 import Particles from "./Backgrounds/Particle";
 import MainMenu from "./Menus/MainMenu";
 import {Routes,Route} from "react-router-dom";
-import About from './Pages/About' 
+import About from './pages/About' 
 import {useState} from 'react'
 import hotcoldImg from './assets/hotcold.png';
 function App() {
