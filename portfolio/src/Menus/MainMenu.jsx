@@ -1,10 +1,10 @@
 import abstractTimekeeper from '../assets/Patterns/abstract-timekeeper.svg';
 import FlowingMenu from './FlowingMenu'
 import './MainMenu.css'
-import About from '../Pages/About';
-import Contact from '../Pages/Contact'
-import Projects from '../Pages/Projects'
-import Resume from '../Pages/Resume'
+import About from '../pages/About';
+import Contact from '../pages/Contact'
+import Projects from '../pages/Projects'
+import Resume from '../pages/Resume'
 import FeedMyBrain from '../pages/FeedMyBrain';
 function MainMenu(){
 const demoItems = [
