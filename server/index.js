@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT;
 const Comment = require("./Comment");
 // Allow CORS from frontend
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://navanshu-portfolio-5m5p.vercel.app" }));
 
 // Parse JSON request bodies
 app.use(express.json());
