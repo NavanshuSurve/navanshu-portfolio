@@ -14,7 +14,7 @@ export default function FeedMyBrain() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/comments");
+        const response = await axios.get("https://navanshu-portfolio.onrender.com/comments");
         setComments(response.data);
       } catch (error) {
         console.error("Failed to fetch comments:", error);
@@ -35,7 +35,7 @@ export default function FeedMyBrain() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/comments",
+        "https://navanshu-portfolio.onrender.com/comments",
         newComment
       );
 
