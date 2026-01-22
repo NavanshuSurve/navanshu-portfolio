@@ -96,8 +96,8 @@ const Particles = ({
   particleBaseSize = 100,
   sizeRandomness = 1,
   cameraDistance = 20,
+  background,
   disableRotation = false,
-  className
 }) => {
   const containerRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -232,7 +232,7 @@ const Particles = ({
     disableRotation
   ]);
 
-  return <div ref={containerRef} className={`particles-container ${className}`} />;
+  return <div ref={containerRef} className={`particles-container-${background}`} />;
 };
 
 export default Particles;

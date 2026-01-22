@@ -1,7 +1,6 @@
 .MainMenu {
   position: absolute;
   top:25px;
-  left:25px;
   height: 300px; 
   width: 100%;
   z-index: 1000;      /* above background */

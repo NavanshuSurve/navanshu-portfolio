@@ -1,12 +1,5 @@
-import './Background.css'
-function Background({background})
-{
-    return(
-        <>
-        <div className={background}>
-            
-        </div>
-        </>
-    )
+import "./Background.css";
+function Background({ className }) {
+  return <div className={className} />;
 }
 export default Background;
