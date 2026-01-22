@@ -1,19 +1,36 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv =require("dotenv");
+const dotenv = require("dotenv");
 const connectDB = require("./db");
 
 dotenv.config();
 
-
 const app = express();
-
 
 const PORT = process.env.PORT;
 const Comment = require("./Comment");
 // Allow CORS from frontend
-app.use(cors({ origin: "https://navanshu-portfolio-5m5p.vercel.app" }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (
+        !origin ||
+        origin.endsWith(".vercel.app") ||
+        origin.includes("localhost")
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS blocked"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  }),
+);
 
+// handle preflight explicitly
+app.options("*", cors());
 // Parse JSON request bodies
 app.use(express.json());
 
@@ -22,12 +39,11 @@ let comments = [];
 
 // 🟢 GET all tasks
 app.get("/comments", async (req, res) => {
-  try{
-    const comments= await Comment.find().sort({ createdAt: -1});
-    res.json(comments)
-  }
-  catch(error){
-res.status(500).json({ message: "Failed to fetch comments" });
+  try {
+    const comments = await Comment.find().sort({ createdAt: -1 });
+    res.json(comments);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch comments" });
   }
 });
 
@@ -48,7 +64,6 @@ app.post("/comments", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 app.get("/", (req, res) => {
   res.send("Comment Manager API running 🚀");
