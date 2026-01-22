@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
 const CommentSchema = new Schema(
   {
@@ -17,7 +18,7 @@ const CommentSchema = new Schema(
   },
   {
     timestamps: true, // automatically adds createdAt & updatedAt
-  }
+  },
 );
 
 module.exports = mongoose.model("Comment", CommentSchema);

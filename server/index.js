@@ -10,27 +10,7 @@ const app = express();
 const PORT = process.env.PORT;
 const Comment = require("./Comment");
 // Allow CORS from frontend
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (
-        !origin ||
-        origin.endsWith(".vercel.app") ||
-        origin.includes("localhost")
-      ) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS blocked"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  }),
-);
-
-// handle preflight explicitly
-app.options("*", cors());
+app.use(cors());
 // Parse JSON request bodies
 app.use(express.json());
 
