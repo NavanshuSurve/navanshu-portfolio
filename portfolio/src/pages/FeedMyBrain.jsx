@@ -11,40 +11,6 @@ export default function FeedMyBrain() {
     name: "",
     comment: "",
   });
-  comments = [
-    {
-      _id: "6970f57c3b04e378460f7efe",
-      name: "khushi",
-      comment: "change ur sheets",
-      createdAt: "2026-01-21T15:49:16.065Z",
-      updatedAt: "2026-01-21T15:49:16.065Z",
-      __v: 0,
-    },
-    {
-      _id: "6970f5223b04e378460f7ef9",
-      name: "Rehman Dakait",
-      comment: "gaadi rok",
-      createdAt: "2026-01-21T15:47:46.729Z",
-      updatedAt: "2026-01-21T15:47:46.729Z",
-      __v: 0,
-    },
-    {
-      _id: "6970503c9104780eaaa58b5b",
-      name: "salmon",
-      comment: "cook me",
-      createdAt: "2026-01-21T04:04:12.894Z",
-      updatedAt: "2026-01-21T04:04:12.894Z",
-      __v: 0,
-    },
-    {
-      _id: "696f4553bc49d2c0a7e16300",
-      name: "Navanshu",
-      comment: "HELLO",
-      createdAt: "2026-01-20T09:05:23.565Z",
-      updatedAt: "2026-01-20T09:05:23.565Z",
-      __v: 0,
-    },
-  ];
 
   useEffect(() => {
     const fetchComments = async () => {
